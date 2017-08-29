@@ -1,0 +1,20 @@
+{{#* inline "value"}}
+  {{#if groupName}}
+	{{> group}}
+  {{else}}
+    <option data-pui="{{pui}}" data-group-name="{{groupName}}" data-label="{{label}}" value="{{pui}}">{{label}}</option>
+  {{/if}}
+{{/inline}}
+{{#* inline "group"}}
+  <optgroup label="{{groupName}}">
+	{{#each values}}
+	  {{> value}}
+    {{/each}}
+  </optgroup>
+{{/inline}}
+
+<select id="{{selectId}}">
+{{#each groups}}
+  {{> group}}
+{{/each}}
+</select>
