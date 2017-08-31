@@ -1,0 +1,7 @@
+version: '2'
+services:
+
+  httpd:
+    build:
+        context: httpd/
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/httpd:${httpd_version}
