@@ -1,0 +1,70 @@
+version: '2'
+services:
+
+
+  i2b2transmart:
+    image: maxcnunes/docker-url-redirect:latest
+    environment:
+      - REDIRECT_URL=https://nhanes.hms.harvard.edu
+    expose:
+      - 8080
+    networks:
+      - nhanes-net
+
+  irct:
+    container_name: ${NHANES_IRCT}
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/irct:${irct_version}
+    depends_on:
+       - mysql
+    environment:
+      - IRCTMYSQLADDRESS=${NHANES_IRCTMYSQLADDRESS}
+      - IRCT_DB_PORT=${NHANES_IRCT_DB_PORT}
+      - IRCT_DB_CONNECTION_USER=${NHANES_IRCT_DB_CONNECTION_USER}
+      - IRCTMYSQLPASS=${NHANES_IRCTMYSQLPASS}
+      - AUTH0_DOMAIN=${NHANES_AUTH0_DOMAIN}
+      - AUTH0_CLIENT_ID=${NHANES_AUTH0_CLIENT_ID}
+      - AUTH0_CLIENT_SECRET=${NHANES_AUTH0_CLIENT_SECRET}
+    restart: always
+    networks:
+      - i2b2-net
+      - nhanes-net
+    expose:
+      - 8080
+
+  mysql:
+    #container_name: ${NHANES_IRCT}_db
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${NHANES_IRCTMYSQLPASS}
+      - MYSQL_DATABASE=irct
+    restart: always
+    expose:
+      - 3306
+    networks:
+      - nhanes-net
+
+  irct-init:
+    #container_name: ${NHANES_IRCT}_init
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/irct-init:${irct_init_version}
+    depends_on:
+      - mysql
+      - irct
+    environment:
+      - IRCT_RESOURCE_NAME=${NHANES_APPLICATION_NAME}
+      - IRCTMYSQLADDRESS=${NHANES_IRCTMYSQLADDRESS}
+      - IRCT_DB_PORT=${NHANES_IRCT_DB_PORT}
+      - IRCT_DB_CONNECTION_USER=${NHANES_IRCT_DB_CONNECTION_USER}
+      - IRCTMYSQLPASS=${NHANES_IRCTMYSQLPASS}
+      - AUTH0_DOMAIN=${NHANES_AUTH0_DOMAIN}
+      - AUTH0_CLIENT_ID=${NHANES_AUTH0_CLIENT_ID}
+    restart: on-failure:10
+    networks:
+      - nhanes-net
+
+networks:
+    nhanes-net:
+        external:
+            name: projects_nhanes-net
+    i2b2-net:
+        external:
+            name: projects_i2b2-net
