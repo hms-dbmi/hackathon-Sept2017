@@ -12,3 +12,8 @@ Some important links to familiarize yourself with hackathon resources:
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
 - [SSC PIC-SURE Example](http://tinyurl.com/dbmi-picsure), a PIC-SURE API example using SSC data (registration and DUA required)
 - [PIC-SURE API Information](https://pic-sure.org/products/bd2k-pic-sure-restful-api) 
+
+### Support
+#### Slack Channel
+#hackathon-general
+https://hms-dbmi.slack.com/messages/C6S1Z0R5Z
