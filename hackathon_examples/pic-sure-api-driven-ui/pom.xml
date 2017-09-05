@@ -128,7 +128,7 @@
 						</goals>
 						<configuration>
 							<overwrite>true</overwrite>
-							<outputDirectory>/Users/jason/avl/hackathon-Sept2017/docker/apache/app</outputDirectory>
+							<outputDirectory>../../docker/apache/app</outputDirectory>
 							<resources>
 								<resource>
 									<directory>target/pic-sure-api-driven-ui</directory>

@@ -30,7 +30,7 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 	};
 
 	// TODO : remove this, its just for debugging
-	
+	window.dropdownBuilder = dropdownBuilder
 	window.labPuis = labPuis;
 	window.examPuis = examPuis;
 
@@ -52,15 +52,20 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 		};
 		return query;
 	};
-
-	$.get(basePath + "/nhanes/Demo",
-			function(data, status, jqXHR){
-		dropdownBuilder(basePath, data, "#examDropdown", examPuis);
-	});	
-	$.get(basePath + "/nhanes/Demo/examination/examination",
-			function(data, status, jqXHR){
-		dropdownBuilder(basePath, data, "#labDropdown", labPuis);
-	});	
+	dropdownBuilder.loadOntology("/nhanes/Demo", function(ontology){
+		dropdownBuilder.populateDropdownWithSubpaths("#examDropdown", "examPui", ontology);
+		dropdownBuilder.populateDropdownWithSubpaths("#labDropdown", "labPui", ontology);		
+	});
+	
+//	
+//	$.get(basePath + "/nhanes/Demo",
+//			function(data, status, jqXHR){
+//		dropdownBuilder.populateDropdownWithSubpaths(basePath, data, "#examDropdown", examPuis);
+//	});	
+//	$.get(basePath + "/nhanes/Demo/examination/examination",
+//			function(data, status, jqXHR){
+//		dropdownBuilder.populateDropdownWithSubpaths(basePath, data, "#labDropdown", labPuis);
+//	});	
 
 	
 	$('#scatter-button').click(function(event){
@@ -68,30 +73,68 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 		var scriptPath = "/NHANES/rest/script";
 		var selectedExamPui = $('#examPui').find(":selected");
 		var selectedLabPui = $('#labPui').find(":selected");
-
+		scatterPlot.renderWait("Collecting Data...");
+		
+		var deferreds = {
+			firstQuery : $.Deferred(),
+			secondQuery : $.Deferred()
+		};
+		
+		var callbacks = {
+			success: function(id, statusSelector){
+				$(statusSelector).removeClass("running")
+				$(statusSelector).addClass("success")
+				console.log(id + " SUCCESS");				
+			},
+			error: function(id, statusSelector){
+				$(statusSelector).removeClass("running")
+				$(statusSelector).addClass("failure")
+				console.log(id + " ERROR");
+			},
+			running: function(id, statusSelector){
+				$(statusSelector).addClass("running");
+				$(statusSelector).toggleClass("dark");
+				console.log(id + " STILL RUNNING");
+			}
+		};
+		
 		queryCacheManager.submitQuery([{
 			pui : selectedExamPui.data("pui"),
 			label : selectedExamPui.data("label"),
 			groupName : selectedExamPui.data("groupname")
-		}], selectedExamPui.data("label"), function(){
-			queryCacheManager.submitQuery([{
-				pui : selectedLabPui.data("pui"),
-				label : selectedLabPui.data("label"),
-				groupName : selectedLabPui.data("groupname")
-			}], selectedLabPui.data("label"), function(){
-				var scriptTime = new Date().getTime();
-				$.ajax(scriptPath, {
-					data : JSON.stringify(scriptQuery(
-							localStorage[selectedExamPui.data("label")], 
-							localStorage[selectedLabPui.data("label")],
-							selectedExamPui.data("label"),
-							selectedLabPui.data("label")
-					)),
-					contentType: 'application/json',
-					type: 'POST',
-					success: scatterPlot.render
-				});
-			});	
-		});
+		}], selectedExamPui.data("label"), deferreds.firstQuery, callbacks, "#examPuiStatus");
+		
+		queryCacheManager.submitQuery([{
+			pui : selectedLabPui.data("pui"),
+			label : selectedLabPui.data("label"),
+			groupName : selectedLabPui.data("groupname")
+		}], selectedLabPui.data("label"), deferreds.secondQuery, callbacks, "#labPuiStatus");
+		
+		var queriesSuccessful = function(){
+			scatterPlot.renderWait("Collected Data... Running Script...");
+			$.ajax(scriptPath, {
+				data : JSON.stringify(scriptQuery(
+						localStorage[selectedExamPui.data("label")], 
+						localStorage[selectedLabPui.data("label")],
+						selectedExamPui.data("label"),
+						selectedLabPui.data("label")
+				)),
+				contentType: 'application/json',
+				type: 'POST',
+				success: function(){
+					scatterPlot.renderWait("Collected Data... Running Script... Rendering...");
+					scatterPlot.render.apply(this, arguments);
+				}
+			});
+			console.log("Success: ");
+		};
+		
+		var someQueriesFailed = function(){
+			console.log("Something failed: ");
+		};
+		
+		$.when(deferreds.firstQuery, deferreds.secondQuery)
+		.then(queriesSuccessful, someQueriesFailed);
+		
 	});
 });
