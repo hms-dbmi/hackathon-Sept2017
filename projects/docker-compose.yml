@@ -1,0 +1,22 @@
+version: '2'
+services:
+
+  httpd:
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/httpd:${httpd_version}
+    environment:
+     - NHANES_IRCT=${NHANES_IRCT}
+     - SSC_IRCT=${SSC_IRCT}
+    #entrypoint: tail -f ${HTTPD_PREFIX}/conf/httpd.conf
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - i2b2-net
+      - nhanes-net
+      #- ssc-net
+
+
+networks:
+    i2b2-net:
+    nhanes-net:
