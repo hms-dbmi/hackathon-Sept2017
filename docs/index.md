@@ -10,4 +10,5 @@ Some important links to familiarize yourself with hackathon resources:
 - [SSC](https://ssc.hms.harvard.edu), another source of data for your visualization (registration and DUA required)
 - [Postman](https://getpostman.com), a useful API exploration tool
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
+- [SSC PIC-SURE Example](http://tinyurl.com/dbmi-picsure), a PIC-SURE API example using SSC data (registration and DUA required)
 - [PIC-SURE API Information](https://pic-sure.org/products/bd2k-pic-sure-restful-api) 
