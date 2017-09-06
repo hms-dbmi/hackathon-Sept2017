@@ -70,7 +70,7 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 	
 	$('#scatter-button').click(function(event){
 		var clickTime = new Date().getTime();
-		var scriptPath = "/NHANES/rest/script";
+		var scriptPath = "/NHANES/rest/scriptService/script";
 		var selectedExamPui = $('#examPui').find(":selected");
 		var selectedLabPui = $('#labPui').find(":selected");
 		scatterPlot.renderWait("Collecting Data...");
