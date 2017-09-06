@@ -20,7 +20,7 @@ define(['underscore', 'plotly'], function(_, plotly){
 				type: 'scatter',
 				text: _.pluck(data.data, "count"),
 				marker: {
-				    size: 5,
+				    size: 10,
 				    color: _.pluck(data.data, "count")
 				  }
 		};
