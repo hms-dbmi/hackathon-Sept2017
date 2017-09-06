@@ -24,7 +24,7 @@ define(['jquery', 'underscore'], function($, _){
 						break;
 					case "ERROR":
 						// Query failed
-						localStorage.removeItem(data.resultId);
+						window.localStorage.removeItem(data.resultId);
 						if(callbacks && typeof callbacks.error === "function"){
 							callbacks.error(data.resultId, statusUpdateId);
 						}
