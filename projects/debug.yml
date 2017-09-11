@@ -5,7 +5,7 @@ services:
   i2b2transmart:
     image: maxcnunes/docker-url-redirect:latest
     environment:
-      - REDIRECT_URL=https://nhanes.hms.harvard.edu
+      - REDIRECT_URL=${NHANES_I2B2TRANSMART_URL}
     expose:
       - 8080
     networks:
