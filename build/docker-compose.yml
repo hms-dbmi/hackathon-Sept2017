@@ -5,3 +5,9 @@ services:
     build:
         context: httpd/
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/httpd:${httpd_version}
+
+
+  securetoken:
+    build:
+        context: securetoken/
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/securetoken:${securetoken_version}

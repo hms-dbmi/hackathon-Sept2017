@@ -11,6 +11,20 @@ services:
     networks:
       - nhanes-net
 
+  securetoken:
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/securetoken:${securetoken_version}
+    restart: always
+    expose:
+      - 8080
+      - 8000
+    command: -s/opt/wildfly-swarm/propnh.yml
+    ports:
+      - 8000:8000
+    networks:
+      - nhanes-net
+    volumes:
+      - ./properties/propnh.yml:/opt/wildfly-swarm/propnh.yml:ro
+
   irct:
     container_name: ${NHANES_IRCT}
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/irct:${irct_version}

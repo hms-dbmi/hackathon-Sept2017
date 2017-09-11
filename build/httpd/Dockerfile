@@ -33,6 +33,8 @@ ENV APPLICATION_NAME default
 # hackathon specific
 ENV NHANES_IRCT nhanes_irct
 ENV SSC_IRCT ssc_irct
+ENV NHANES_BEARER_TOKEN nhanes_token
+ENV SSC_BEARER_TOKEN ssc_token
 
 # generate self-signed certificate (if they don't exist)
 COPY scripts/gencerts.sh /docker-entrypoint
