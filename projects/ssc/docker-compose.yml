@@ -5,7 +5,7 @@ services:
   i2b2transmart:
     image: maxcnunes/docker-url-redirect:latest
     environment:
-      - REDIRECT_URL=${SSC_I2B2TRANSMART_URL}
+      - REDIRECT_URL=${I2B2TRANSMART_URL}
     expose:
       - 8080
     networks:
@@ -18,14 +18,11 @@ services:
        - mysql
        - i2b2transmart
     environment:
-      - IRCTMYSQLADDRESS=${SSC_IRCTMYSQLADDRESS}
-      - IRCT_DB_PORT=${SSC_IRCT_DB_PORT}
-      - IRCT_DB_CONNECTION_USER=${SSC_IRCT_DB_CONNECTION_USER}
-      - IRCTMYSQLPASS=${SSC_IRCTMYSQLPASS}
-      - AUTH0_DOMAIN=${SSC_AUTH0_DOMAIN}
-      - AUTH0_CLIENT_ID=${SSC_AUTH0_CLIENT_ID}
-      - AUTH0_CLIENT_SECRET=${SSC_AUTH0_CLIENT_SECRET}
-      - IRCT_SECURITY_SERVICE=${SSC_IRCT_SECURITY_SERVICE}
+      - IRCTMYSQLADDRESS=${IRCTMYSQLADDRESS}
+      - IRCT_DB_PORT=${IRCT_DB_PORT}
+      - IRCT_DB_CONNECTION_USER=${IRCT_DB_CONNECTION_USER}
+      - IRCTMYSQLPASS=${IRCTMYSQLPASS}
+      - IRCT_SECURITY_SERVICE=${IRCT_SECURITY_SERVICE}
     restart: always
     networks:
       - i2b2-net
@@ -36,7 +33,7 @@ services:
   mysql:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=${SSC_IRCTMYSQLPASS}
+      - MYSQL_ROOT_PASSWORD=${IRCTMYSQLPASS}
       - MYSQL_DATABASE=irct
     restart: always
     expose:
@@ -50,13 +47,14 @@ services:
       - mysql
       - irct
     environment:
-      - IRCT_RESOURCE_NAME=${SSC_APPLICATION_NAME}
-      - IRCTMYSQLADDRESS=${SSC_IRCTMYSQLADDRESS}
-      - IRCT_DB_PORT=${SSC_IRCT_DB_PORT}
-      - IRCT_DB_CONNECTION_USER=${SSC_IRCT_DB_CONNECTION_USER}
-      - IRCTMYSQLPASS=${SSC_IRCTMYSQLPASS}
-      - AUTH0_DOMAIN=${SSC_AUTH0_DOMAIN}
-      - AUTH0_CLIENT_ID=${SSC_AUTH0_CLIENT_ID}
+      - IRCT_RESOURCE_NAME=${APPLICATION_NAME}
+      - IRCTMYSQLADDRESS=${IRCTMYSQLADDRESS}
+      - IRCT_DB_PORT=${IRCT_DB_PORT}
+      - IRCT_DB_CONNECTION_USER=${IRCT_DB_CONNECTION_USER}
+      - IRCTMYSQLPASS=${IRCTMYSQLPASS}
+      - SCIDB_HOST=${SCIDB_HOST}
+      - SCIDB_USER=${SCIDB_USER}
+      - SCIDB_PASSWORD=${SCIDB_PASSWORD}
     restart: on-failure:10
     networks:
       - ssc-net

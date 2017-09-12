@@ -5,7 +5,7 @@ services:
   i2b2transmart:
     image: maxcnunes/docker-url-redirect:latest
     environment:
-      - REDIRECT_URL=${NHANES_I2B2TRANSMART_URL}
+      - REDIRECT_URL=${I2B2TRANSMART_URL}
     expose:
       - 8080
     networks:
@@ -24,8 +24,8 @@ services:
     networks:
       - nhanes-net
     volumes:
-      #- ./properties/propssc.yml:/opt/wildfly-swarm/propssc.yml:ro
-      - ./properties/propnh.yml:/opt/wildfly-swarm/propnh.yml:ro
+      #- ../properties/propssc.yml:/opt/wildfly-swarm/propssc.yml:ro
+      - ../properties/propnh.yml:/opt/wildfly-swarm/propnh.yml:ro
 
   irct:
     container_name: ${NHANES_IRCT}
@@ -34,13 +34,10 @@ services:
        - mysql
        - i2b2transmart
     environment:
-      - IRCTMYSQLADDRESS=${NHANES_IRCTMYSQLADDRESS}
-      - IRCT_DB_PORT=${NHANES_IRCT_DB_PORT}
-      - IRCT_DB_CONNECTION_USER=${NHANES_IRCT_DB_CONNECTION_USER}
-      - IRCTMYSQLPASS=${NHANES_IRCTMYSQLPASS}
-      - AUTH0_DOMAIN=${NHANES_AUTH0_DOMAIN}
-      - AUTH0_CLIENT_ID=${NHANES_AUTH0_CLIENT_ID}
-      - AUTH0_CLIENT_SECRET=${NHANES_AUTH0_CLIENT_SECRET}
+      - IRCTMYSQLADDRESS=${IRCTMYSQLADDRESS}
+      - IRCT_DB_PORT=${IRCT_DB_PORT}
+      - IRCT_DB_CONNECTION_USER=${IRCT_DB_CONNECTION_USER}
+      - IRCTMYSQLPASS=${IRCTMYSQLPASS}
       - IRCT_SECURITY_SERVICE=http://securetoken:8080/token/validate
     restart: always
     networks:
@@ -52,7 +49,7 @@ services:
   mysql:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=${NHANES_IRCTMYSQLPASS}
+      - MYSQL_ROOT_PASSWORD=${IRCTMYSQLPASS}
       - MYSQL_DATABASE=irct
     restart: always
     expose:
@@ -66,13 +63,14 @@ services:
       - mysql
       - irct
     environment:
-      - IRCT_RESOURCE_NAME=${NHANES_APPLICATION_NAME}
-      - IRCTMYSQLADDRESS=${NHANES_IRCTMYSQLADDRESS}
-      - IRCT_DB_PORT=${NHANES_IRCT_DB_PORT}
-      - IRCT_DB_CONNECTION_USER=${NHANES_IRCT_DB_CONNECTION_USER}
-      - IRCTMYSQLPASS=${NHANES_IRCTMYSQLPASS}
-      - AUTH0_DOMAIN=${NHANES_AUTH0_DOMAIN}
-      - AUTH0_CLIENT_ID=${NHANES_AUTH0_CLIENT_ID}
+      - IRCT_RESOURCE_NAME=${APPLICATION_NAME}
+      - IRCTMYSQLADDRESS=${IRCTMYSQLADDRESS}
+      - IRCT_DB_PORT=${IRCT_DB_PORT}
+      - IRCT_DB_CONNECTION_USER=${IRCT_DB_CONNECTION_USER}
+      - IRCTMYSQLPASS=${IRCTMYSQLPASS}
+      - SCIDB_HOST=${SCIDB_HOST}
+      - SCIDB_USER=${SCIDB_USER}
+      - SCIDB_PASSWORD=${SCIDB_PASSWORD}
     restart: on-failure:10
     networks:
       - nhanes-net

@@ -3,11 +3,11 @@ services:
 
   httpd:
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/httpd:${httpd_version}
-    environment:
-     - NHANES_IRCT=${NHANES_IRCT}
-     - NHANES_BEARER_TOKEN=${NHANES_BEARER_TOKEN}
-     - SSC_IRCT=${SSC_IRCT}
-     - SSC_BEARER_TOKEN=${SSC_BEARER_TOKEN}
+    # project-specific bearer tokens and application names
+    # are found in the environment variable files
+    env_file:
+     - nhanes/.env
+     - ssc/.env
     restart: always
     ports:
       - "80:80"
