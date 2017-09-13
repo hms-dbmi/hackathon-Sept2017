@@ -15,11 +15,15 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - ./htdocs:/usr/local/apache2/htdocs:rw
+      - ./certs/server-ca.crt:/usr/local/apache2/conf/server-ca.crt:rw
+      - ./certs/server.crt:/usr/local/apache2/conf/server.crt:rw
+      - ./certs/server.key:/usr/local/apache2/conf/server.key:rw
     networks:
       - i2b2-net
       - nhanes-net
       - ssc-net
-
 
 networks:
     i2b2-net:

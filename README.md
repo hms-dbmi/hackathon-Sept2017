@@ -38,7 +38,7 @@ To independently test the stack outside from one of our production environments,
 
 ### Environment File (.env)
 
-Populate the following nhanes/.env variables (IGNORE THAT IT READS NHANES -- I just always test with NHANES. Can be any i2b2transmart stack you have access to its secrets):
+Populate the following projects/nhanes/.env variables (IGNORE THAT IT READS NHANES -- I just always test with NHANES. Can be any i2b2transmart stack you have access to its secrets):
 
 ```
 # irct stack
@@ -64,6 +64,7 @@ IRCT_RESOURCE_NAME=
 ### Run the following docker-compose commands
 
 ```
+cd projects/
 docker-compose up -d
 cd nhanes/
 docker-compose -f dev.yml up -d irct securetoken
@@ -115,6 +116,7 @@ SCIDB_PASSWORD=
 
 ```
 # loads up networks, httpd
+cd projects/
 docker-compose up -d
 
 # starts up irct stack
