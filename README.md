@@ -67,6 +67,7 @@ IRCT_RESOURCE_NAME=
 cd projects/
 docker-compose up -d
 cd nhanes/
+#Ensure that you have shared the containing dir in your Docker Engine (locally)
 docker-compose -f dev.yml up -d irct securetoken
 (wait 60 secs)
 docker-compose -f dev.yml up -d irct-init
