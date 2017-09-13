@@ -1,13 +1,9 @@
 -- Set the resource parameters
--- These are now set in init-db script
--- set @resourceName = '${IRCT_RESOURCE_NAME}';
-set @transmartURL = 'http://i2b2transmart:8080/transmart';
-set @resourceURL = 'http://i2b2transmart:8080/transmart/proxy?url=http://localhost:9090/i2b2/services/';
+set @transmartURL = CONCAT(@transmartHost, '/transmart');
+set @resourceURL = CONCAT(@transmartURL, '/proxy?url=http://localhost:9090/i2b2/services/');
 set @domain = 'i2b2demo';
 set @userName = 'Demo';
 set @password = 'demouser';
--- set @auth0ClientId = '${IRCT_AUTH0_CLIENT_ID}';
--- set @auth0Domain = '${IRCT_AUTH0_DOMAIN}';
 set @ignoreCertificate = 'false';
 
 set @resourceImplementingInterface = 'edu.harvard.hms.dbmi.bd2k.irct.ri.i2b2transmart.I2B2TranSMARTResourceImplementation';

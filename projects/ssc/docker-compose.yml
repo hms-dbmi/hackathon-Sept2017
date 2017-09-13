@@ -1,22 +1,11 @@
 version: '2'
 services:
 
-
-  i2b2transmart:
-    image: maxcnunes/docker-url-redirect:latest
-    environment:
-      - REDIRECT_URL=${I2B2TRANSMART_URL}
-    expose:
-      - 8080
-    networks:
-      - ssc-net
-
   irct:
     container_name: ${SSC_IRCT}
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/irct:${irct_version}
     depends_on:
        - mysql
-       - i2b2transmart
     environment:
       - IRCTMYSQLADDRESS=${IRCTMYSQLADDRESS}
       - IRCT_DB_PORT=${IRCT_DB_PORT}
@@ -52,9 +41,13 @@ services:
       - IRCT_DB_PORT=${IRCT_DB_PORT}
       - IRCT_DB_CONNECTION_USER=${IRCT_DB_CONNECTION_USER}
       - IRCTMYSQLPASS=${IRCTMYSQLPASS}
+      - I2B2TRANSMART_URL=${I2B2TRANSMART_URL}
       - SCIDB_HOST=${SCIDB_HOST}
       - SCIDB_USER=${SCIDB_USER}
       - SCIDB_PASSWORD=${SCIDB_PASSWORD}
+    volumes:
+      - ../script/i2b2tranSMARTsetup.sql:/scratch/irct/sql/i2b2tranSMARTsetup.sql:rw
+      - ../script/init-db.sh:/scratch/irct/sql/init-db.sh:rw
     restart: on-failure:10
     networks:
       - ssc-net
