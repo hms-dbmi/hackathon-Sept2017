@@ -5,6 +5,9 @@ services:
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/httpd:${httpd_version}
     # project-specific bearer tokens and application names
     # are found in the environment variable files
+    labels:
+      - "app.name=httpd"
+      - "app.environment=hackathon"
     env_file:
      - nhanes/.env
      - ssc/.env

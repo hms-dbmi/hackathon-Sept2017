@@ -3,6 +3,9 @@ services:
 
   securetoken:
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/securetoken:${securetoken_version}
+    labels:
+      - "app.name=${APPLICATION_NAME}"
+      - "app.environment=hackathon"
     restart: always
     expose:
       - 8080
@@ -20,6 +23,9 @@ services:
   irct:
     container_name: ${NHANES_IRCT}
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/irct:${irct_version}
+    labels:
+      - "app.name=${APPLICATION_NAME}"
+      - "app.environment=hackathon"
     depends_on:
        - mysql
     environment:
@@ -37,6 +43,9 @@ services:
 
   mysql:
     image: mysql:latest
+    labels:
+      - "app.name=${APPLICATION_NAME}"
+      - "app.environment=hackathon"
     environment:
       - MYSQL_ROOT_PASSWORD=${IRCTMYSQLPASS}
       - MYSQL_DATABASE=irct
@@ -48,6 +57,9 @@ services:
 
   irct-init:
     image: dtr.avl.dbmi.hms.harvard.edu/dbmi/irct-init:${irct_init_version}
+    labels:
+      - "app.name=${APPLICATION_NAME}"
+      - "app.environment=hackathon"
     depends_on:
       - mysql
       - irct

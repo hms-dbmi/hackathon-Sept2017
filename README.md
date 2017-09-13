@@ -15,6 +15,23 @@ irct_version=2496.hackathon
 irct_init_version=0.4.0
 ```
 
+## Before Deploying
+
+Make sure you are logged into the DTR (<https://dtr.avl.dbmi.hms.harvard.edu>)
+
+```
+docker login dtr.avl.dbmi.hms.harvard.edu
+```
+
+## Run Datadog
+
+If you would like to monitor the IRCT stacks in DataDog, run the following commands:
+
+```
+cd datadog/
+docker-compose up -d
+```
+
 ## Deploying the IRCT stack (development)
 
 To independently test the stack outside from one of our production environments, the following configuration is required:

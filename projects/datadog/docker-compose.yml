@@ -1,0 +1,15 @@
+version: '2'
+services:
+  dd-agent:
+    build:
+        context: ./
+    image: dtr.avl.dbmi.hms.harvard.edu/dbmi/dd-agent:latest
+    environment:
+      - API_KEY=e5c74a4d3c394e204f9256402ae42880
+      - affinity:container!=*datadog_dd-agent*
+      - SD_BACKEND=docker
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
