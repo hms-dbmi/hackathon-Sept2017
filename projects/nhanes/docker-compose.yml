@@ -55,6 +55,8 @@ services:
       - SCIDB_HOST=${SCIDB_HOST}
       - SCIDB_USER=${SCIDB_USER}
       - SCIDB_PASSWORD=${SCIDB_PASSWORD}
+    volumes:
+      - ../script/i2b2tranSMARTsetup.sql:/scratch/irct/sql/i2b2tranSMARTsetup.sql:rw
     restart: on-failure:10
     networks:
       - nhanes-net
