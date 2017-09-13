@@ -10,15 +10,13 @@ services:
     expose:
       - 8080
       - 8000
-    #command: -s/opt/wildfly-swarm/propssc.yml
-    command: -s/opt/wildfly-swarm/propnh.yml
+    command: -s/opt/wildfly-swarm/prop.yml
     ports:
       - 8000:8000
     networks:
       - nhanes-net
     volumes:
-      #- ../properties/propssc.yml:/opt/wildfly-swarm/propssc.yml:ro
-      - ../properties/propnh.yml:/opt/wildfly-swarm/propnh.yml:ro
+      - ./properties/prop.yml:/opt/wildfly-swarm/prop.yml:ro
 
   irct:
     container_name: ${NHANES_IRCT}

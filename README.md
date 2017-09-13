@@ -57,7 +57,7 @@ I2B2TRANSMART_URL=
 IRCT_RESOURCE_NAME=
 ```
 
-### Populate the file properties/propnh.yml with the Auth0 client secret
+### Populate the file projects/nhanes/properties/prop.yml with the Auth0 client secret
 
 `client_secret:`
 
