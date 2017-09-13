@@ -11,7 +11,7 @@ Contestants are challenged with providing a user interface data exploration tool
 ```
 httpd_version=hackathon
 securetoken_version=hackathon
-irct_version=2496.hackathon
+irct_version=2501.hackathon
 irct_init_version=0.4.0
 ```
 
