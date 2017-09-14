@@ -33,12 +33,12 @@ API query examples
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fed8adc750188d16ac62)
 
 
-### Support
-#### Slack Channel
+# Support
+### Slack Channel
 [#hackathon-general](https://hms-dbmi.slack.com/messages/C6S1Z0R5Z)
 
-#### Slack direct messages
-*PIC-SURE API developers*
+### Slack direct messages
+*PIC-SURE API core developers*
 [Jason](https://hms-dbmi.slack.com/messages/D2P4FLJAZ)
 [Gabe](https://hms-dbmi.slack.com/messages/D0GDQP25P)
 
