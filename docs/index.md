@@ -11,6 +11,7 @@ Some important links to familiarize yourself with hackathon resources:
 
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c29d4cff65e4aecc8216)
 
 ## Autism Simons Simplex Collection 
 # SSC Clinical Data
