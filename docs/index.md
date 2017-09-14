@@ -12,13 +12,12 @@ ___
 - [NHANES i2b2/tranSMART User Interface](https://nhanes.hms.harvard.edu), a source of data for your visualization (publicly available and open)
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
 -- NHANES JupyterNotebooks
-- [![NHANES Postman Examples](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/06404fa2f11335bf5be1) Some simple data queries.
 
 ### API query examples
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/172cd3c42f8d51f930d5) 101 example by Cartik
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c29d4cff65e4aecc8216) Advanced examples by Gabe
+[![NHANES Postman Examples](https://run.pstmn.io/button.svg)] Advanced examples by Gabe
 
 ___
 
