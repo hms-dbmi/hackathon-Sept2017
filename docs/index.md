@@ -58,3 +58,12 @@ ___
 [AJ](https://hms-dbmi.slack.com/messages/D1R9Y1CMR)
 
 ## Or find us in the Lounge 4th floor bettewn 423 and 424
+
+
+---
+# Where is my personal Autism SSC-dev  PIC-SURE API key?
+1) Register here: to SSC i2b2/tranSMART: https://ssc-dev.hms.harvard.edu
+2) after approval, log back in https://ssc-dev.hms.harvard.edu
+3) Click on your name (top right), then User profile
+4) copy/paste your personal BD2K PIC-SURE API key
+5) if you want to use JupyterHUB, click here:  https://ssc-hub.hms.harvard.edu 
