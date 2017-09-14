@@ -34,7 +34,7 @@ ___
 *2,6K probands (affected kid)  6K clinical variables  8.6K full annotated exomes*
 
 ### SSC Clinical Data
-- [SSC](https://ssc.hms.harvard.edu), another source of data for your visualization (registration and DUA required)
+- [SSC-dev](https://ssc-dev.hms.harvard.edu), another source of data for your visualization (registration and DUA required)
 
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
 - [SSC PIC-SURE Example](http://tinyurl.com/dbmi-picsure), a PIC-SURE API example using SSC data (registration and DUA required)
