@@ -27,7 +27,6 @@ ___
 
 >### Slides from opening presentation
 >- [Google Drive Link](https://docs.google.com/presentation/d/19JO5TcMTP9G3VK_Bvr4sEvv6seS8dYHDCBgaA67Ce_Y/edit?usp=sharing)
-```
 
 ___
 
