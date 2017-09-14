@@ -3,8 +3,8 @@
 Welcome to the September 2017 Hackathon information page.
 
 Some important links to familiarize yourself with hackathon resources:
-
-## NHANES
+___
+# NHANES
 *41K individual  1,3K variables*
 
 [Patel CJ, et al. A database of human exposomes and phenomes from the US National Health and Nutrition Examination Survey. Sci Data. 2016 Oct 25;3:160096](http://dx.doi.org/10.1038/sdata.2016.96)
@@ -22,8 +22,8 @@ Some important links to familiarize yourself with hackathon resources:
 ### Live example UI using PIC-SURE presented by Jason
 - Link ???
 - [The code for the example UI](https://github.com/hms-dbmi/hackathon-Sept2017/tree/master/hackathon_examples/pic-sure-api-driven-ui/src/main/webapp)
-
-## Autism Simons Simplex Collection 
+___
+# Autism Simons Simplex Collection 
 *2,6K probands (affected kid)  6K clinical variables  8.6K full annotated exomes*
 
 ### SSC Clinical Data
@@ -38,7 +38,7 @@ Some important links to familiarize yourself with hackathon resources:
 ### SSC All Exome annotated in SciDB
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fed8adc750188d16ac62)
 
-
+___
 # Support
 ### Slack Channel
 [#hackathon-general](https://hms-dbmi.slack.com/messages/C6S1Z0R5Z)
