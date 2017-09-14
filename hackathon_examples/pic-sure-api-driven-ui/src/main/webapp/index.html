@@ -10,11 +10,33 @@
 	<div id='header'>
 		<h1>PIC-SURE Scatter Plots</h1>
 	</div>
-	<div class='container'>
-		<span>X Axis : </span><span id='examDropdown'></span><span id="examPuiStatus" class="pui-status dark">&#9673;</span><br>
-		<span>Y Axis : </span><span id='labDropdown'></span><span id="labPuiStatus" class="pui-status dark">&#9673;</span><br>
-		<a class="btn btn-default" id="scatter-button">Visualize</a>
+	<div class='well'>
+		<h2>NHANES :</h2>
+		<div class='container'>
+			<span id="nhanesXProgressSpinner"></span>
+			<span id="nhanesXProgressPath"></span><br>
+			<span>X Axis : </span><span data-service='/NHANES/rest/resourceService/path/' data-pui='nhanes-prod/Demo/examination/examination/body measures' id='nhanesXDropdown'></span><span id="nhanesXPuiStatus" class="pui-status dark">&#9673;</span><br>
+			<span id="nhanesYProgressSpinner"></span>
+			<span id="nhanesYProgressPath"></span><br>
+			<span>Y Axis : </span><span data-service='/NHANES/rest/resourceService/path/' data-pui='nhanes-prod/Demo/laboratory/laboratory/biochemistry' id='nhanesYDropdown'></span><span id="nhanesYPuiStatus" class="pui-status dark">&#9673;</span><br>
+		</div>
+		<a class="btn btn-default scatter-button" data-resource="NHANES">Visualize</a>
+		<div id="NHANES-scatter"></div>
 	</div>
-	<div id="scatter"></div>
+	<div class='well'>
+		<h2>SSC :</h2>
+		<div class='container'>
+		    <p>Please select a phenotype variable for the Y Axis, then use the autocomplete to select a SciDB Variant, then hit Visualize. 
+		    You will be presented with a graph where the X Axis is the patient id and the Y Axis is an autoscaled value of the chosen
+		    phenotype. The color of each dot will represent how many variants are present where the VCF_DP metric is greater than 20.</p>
+			<span id="SSCProgressSpinner"></span><br>
+			<span id="SSCProgressPath"></span><br>
+			<span>X Axis : </span><span data-service='/SSC/rest/resourceService/path/' data-pui='ssc-dev/Demo/SFARI_Simplex_Collection_v15/SFARI_Simplex_Collection_v15/Clinical_clean/ssc_commonly_used' id='sscXDropdown'></span><span id="sscXPuiStatus" class="pui-status dark">&#9673;</span><br>
+			<span>Y Axis : </span><span data-service='/SSC/rest/resourceService/path/' data-pui='ssc-dev/Demo/SFARI_Simplex_Collection_v15/SFARI_Simplex_Collection_v15/Clinical_clean/vineland_ii' id='sscYDropdown'></span><span id="sscYPuiStatus" class="pui-status dark">&#9673;</span><br>
+			<span>SciDB Variant : </span><input id="sscSciDBColor"></input><span id="sciDbPuiStatus" class="pui-status dark">&#9673;</span><br>
+		</div>
+		<a class="btn btn-default scatter-button" data-resource="SSC">Visualize</a>
+		<div id="SSC-scatter"></div>
+	</div>
 </body>
 </html>

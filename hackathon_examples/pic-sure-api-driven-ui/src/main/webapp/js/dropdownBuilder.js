@@ -10,10 +10,11 @@ define(["puiCleaner", "text!../hbs/puiDropdown.hbs", 'underscore', 'handlebars',
 	 *  Use the above template to create a select with
 	 *  all paths.
 	 */
-	var populateDropdownWithSubpaths = function(dropdownSelector, selectId, groupMap){
+	var populateDropdownWithSubpaths = function(dropdownSelector, selectId, ontology){
+		var dropdownDataset = $(dropdownSelector).data();
 		$(dropdownSelector).html(puiSelectTemplate({
 				selectId : selectId,
-				groups : groupMap
+				groups : ontology
 			}));
 	};
 	
@@ -23,8 +24,10 @@ define(["puiCleaner", "text!../hbs/puiDropdown.hbs", 'underscore', 'handlebars',
 	 * We use localStorage to cache the paths client side so 
 	 * page refreshes don't take forever.
 	 */
-	var loadOntology = function(baseUrl, callback){
-		var basePath = "/NHANES/rest/resourceService/path";
+	var loadOntology = function(dropdownSelector, callback, spinnerSelector, pathSelector){
+		var dropdownDataset = $('#'+dropdownSelector).data();
+		var basePath = dropdownDataset.service;
+		var baseUrl = dropdownDataset.pui;
 		var tree = [];
 
 		/*
@@ -34,15 +37,18 @@ define(["puiCleaner", "text!../hbs/puiDropdown.hbs", 'underscore', 'handlebars',
 		 * 
 		 * If it's already cached, we just pass it back.
 		 */
-		if(localStorage.getItem("tree") !== null){
-			tree = JSON.parse(window.localStorage.getItem("tree"));
+		if(localStorage.getItem(baseUrl) !== null){
+			tree = JSON.parse(window.localStorage.getItem(baseUrl));
 			callback(tree);
 		} else {
+			$(spinnerSelector).html('<span>Loading tree for the first time, may take a while.</span><br><span id="loadingSpinner" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
+			
 			/*
 			 * Map the current path and all sub-paths 
 			 * into a pathGrouping object.
 			 */
 			var buildGrouping = function(pathInfo, callback){
+				$(pathSelector).html(pathInfo.pui);
 				var pathGrouping = {
 					groupName : pathInfo.displayName,
 					pui : pathInfo.pui,
@@ -57,7 +63,7 @@ define(["puiCleaner", "text!../hbs/puiDropdown.hbs", 'underscore', 'handlebars',
 				 * Resolve our local deferred when this has been completed.
 				 */
 				var descendIntoTree = function(){
-					$.get(basePath + puiCleaner(pathInfo.pui), function(childData, status, jqXHR){
+					$.get(basePath + baseUrl + "/" + puiCleaner(pathInfo.name), function(childData, status, jqXHR){
 						var childDeferreds = [];
 						_.each(childData, function(childPathInfo){
 							var childDeferred = $.Deferred();
@@ -120,8 +126,10 @@ define(["puiCleaner", "text!../hbs/puiDropdown.hbs", 'underscore', 'handlebars',
 					topLevelDeferreds.push(childDeferred);
 				});
 				$.when.apply($, topLevelDeferreds).then(function(tree){
-					window.localStorage.setItem("tree", JSON.stringify(tree));
+					window.localStorage.setItem(baseUrl, JSON.stringify(tree));
 					callback(tree);
+					$(spinnerSelector).html("");
+					$(pathSelector).html("");
 				});
 			});
 		}
