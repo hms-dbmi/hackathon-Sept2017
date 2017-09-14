@@ -35,9 +35,9 @@ API query examples
 
 ### Support
 #### Slack Channel
-#hackathon-general
-https://hms-dbmi.slack.com/messages/C6S1Z0R5Z
+[#hackathon-general](https://hms-dbmi.slack.com/messages/C6S1Z0R5Z)
 
+#### Slack direct messages
 *PIC-SURE API developers*
 [Jason](https://hms-dbmi.slack.com/messages/D2P4FLJAZ)
 [Gabe](https://hms-dbmi.slack.com/messages/D0GDQP25P)
@@ -51,5 +51,4 @@ https://hms-dbmi.slack.com/messages/C6S1Z0R5Z
 *DevOps*
 [AJ](https://hms-dbmi.slack.com/messages/D1R9Y1CMR)
 
-
-Or find us in the Lounge 4th floor betten 423 and 424
+## Or find us in the Lounge 4th floor bettewn 423 and 424
