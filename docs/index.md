@@ -17,7 +17,7 @@ ___
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/172cd3c42f8d51f930d5) 101 example by Cartik
 
-[![NHANES Postman Examples](https://run.pstmn.io/button.svg)] Advanced examples by Gabe
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/06404fa2f11335bf5be1) Advanced examples by Gabe
 
 ___
 
