@@ -38,4 +38,18 @@ API query examples
 #hackathon-general
 https://hms-dbmi.slack.com/messages/C6S1Z0R5Z
 
+*PIC-SURE API developers*
+[Jason](https://hms-dbmi.slack.com/messages/D2P4FLJAZ)
+[Gabe](https://hms-dbmi.slack.com/messages/D0GDQP25P)
+
+*Database developer*
+[Ranjay](https://hms-dbmi.slack.com/messages/D0RHE6FM3)
+
+*Docker developer*
+[Andre](https://hms-dbmi.slack.com/messages/D1F40H2KA)
+
+*DevOps*
+[AJ](https://hms-dbmi.slack.com/messages/D1R9Y1CMR)
+
+
 Or find us in the Lounge 4th floor betten 423 and 424
