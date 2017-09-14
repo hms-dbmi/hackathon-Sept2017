@@ -19,13 +19,15 @@ ___
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c29d4cff65e4aecc8216) Advanced examples by Gabe
 
-### Live example UI using PIC-SURE presented by Jason
-- https://team-15.aws.dbmi.hms.harvard.edu/
-- [The code for the example UI](https://github.com/hms-dbmi/hackathon-Sept2017/tree/master/hackathon_examples/pic-sure-api-driven-ui/src/main/webapp)
+>### Live example UI using PIC-SURE presented by Jason
+>- https://team-15.aws.dbmi.hms.harvard.edu/
+>- [The code for the example UI](https://github.com/hms-dbmi/hackathon-Sept2017/tree/master/hackathon_examples/pic-sure-api-driven-ui/src/main/webapp)
 
-### Slides from opening presentation
-- [Google Drive Link](https://docs.google.com/presentation/d/19JO5TcMTP9G3VK_Bvr4sEvv6seS8dYHDCBgaA67Ce_Y/edit?usp=sharing)
+>### Slides from opening presentation
+>- [Google Drive Link](https://docs.google.com/presentation/d/19JO5TcMTP9G3VK_Bvr4sEvv6seS8dYHDCBgaA67Ce_Y/edit?usp=sharing)
+
 ___
+
 # Autism Simons Simplex Collection 
 *2,6K probands (affected kid)  6K clinical variables  8.6K full annotated exomes*
 
