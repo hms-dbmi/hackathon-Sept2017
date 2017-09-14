@@ -13,7 +13,7 @@ Some important links to familiarize yourself with hackathon resources:
 
 
 ## Autism Simons Simplex Collection 
-SSC Clinical Data
+# SSC Clinical Data
 - [SSC](https://ssc.hms.harvard.edu), another source of data for your visualization (registration and DUA required)
 
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
@@ -22,7 +22,8 @@ SSC Clinical Data
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dc140db46b8e6bb299e6)
 
-
+# SSC All annotated Exome data (8600 individuals) in SciDB
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fed8adc750188d16ac62)
 
 
 ### Support
