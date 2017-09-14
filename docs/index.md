@@ -38,6 +38,7 @@ ___
 ### SSC All Exome annotated in SciDB
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fed8adc750188d16ac62)
 
+[SciDB tutorial in Jupyter notebooks](https://ssc-hub.hms.harvard.edu/) Then /readonly/SciDB_tutorial
 ___
 # Support
 ### Slack Channel
