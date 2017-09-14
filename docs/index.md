@@ -5,17 +5,22 @@ Welcome to the September 2017 Hackathon information page.
 Some important links to familiarize yourself with hackathon resources:
 
 ## NHANES
+*41K individual  1,3K variables*
+
 [Patel CJ, et al. A database of human exposomes and phenomes from the US National Health and Nutrition Examination Survey. Sci Data. 2016 Oct 25;3:160096](http://dx.doi.org/10.1038/sdata.2016.96)
 
 - [NHANES i2b2/tranSMART User Interface](https://nhanes.hms.harvard.edu), a source of data for your visualization (publicly available and open)
 - [The code for the example UI](https://github.com/hms-dbmi/hackathon-Sept2017/tree/master/hackathon_examples/pic-sure-api-driven-ui/src/main/webapp)
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
-
+API query examples
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/172cd3c42f8d51f930d5) by Cartik
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c29d4cff65e4aecc8216) by Gabe
 
 ## Autism Simons Simplex Collection 
-# SSC Clinical Data
+*2,6K probands (affected kid)  6K clinical variables  8.6K full annotated exomes*
+
+### SSC Clinical Data
 - [SSC](https://ssc.hms.harvard.edu), another source of data for your visualization (registration and DUA required)
 
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
@@ -24,7 +29,7 @@ Some important links to familiarize yourself with hackathon resources:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dc140db46b8e6bb299e6)
 
-# SSC All annotated Exome data (8600 individuals) in SciDB
+### SSC All Exome annotated in SciDB
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fed8adc750188d16ac62)
 
 
