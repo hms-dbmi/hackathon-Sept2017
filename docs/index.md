@@ -11,7 +11,8 @@ Some important links to familiarize yourself with hackathon resources:
 - [The code for the example UI](https://github.com/hms-dbmi/hackathon-Sept2017/tree/master/hackathon_examples/pic-sure-api-driven-ui/src/main/webapp)
 - [SSC JupyterHub](https://ssc-hub.hms.harvard.edu), a powerful server-side computation tool (registration and DUA required)
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c29d4cff65e4aecc8216)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/172cd3c42f8d51f930d5) by Cartik
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c29d4cff65e4aecc8216) by Gabe
 
 ## Autism Simons Simplex Collection 
 # SSC Clinical Data
