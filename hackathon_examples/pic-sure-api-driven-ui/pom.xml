@@ -73,6 +73,11 @@
 			<artifactId>uglifyjs</artifactId>
 			<version>2.3.6</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mitre.dsmiley.httpproxy</groupId>
+			<artifactId>smiley-http-proxy-servlet</artifactId>
+			<version>1.10</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>pic-sure-api-driven-ui</finalName>
@@ -81,7 +86,7 @@
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.0</version>
+					<version>2.2</version>
 					<executions>
 						<execution>
 							<id>default-cli</id>
