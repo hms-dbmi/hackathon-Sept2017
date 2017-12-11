@@ -20,9 +20,15 @@ require.config({
 });
 
 
-require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager", "jquery", "underscore", "bootstrap", "jqueryAuto"],
-		function(scatterPlot, dropdownBuilder, remoteFunctions, queryCacheManager, $, _){
-	var basePath = "/NHANES/rest/resourceService/path";
+require(["resourceMeta", "scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager", "jquery", "underscore", "bootstrap", "jqueryAuto"],
+		function(resourceMeta, scatterPlot, dropdownBuilder, remoteFunctions, queryCacheManager, $, _){
+
+	$.ajaxSetup(
+			{
+				headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0fGF2bGJvdEBkYm1pLmhtcy5oYXJ2YXJkLmVkdSIsImVtYWlsIjoiYXZsYm90QGRibWkuaG1zLmhhcnZhcmQuZWR1In0.51TYsm-uw2VtI8aGawdggbGdCSrPJvjtvzafd2Ii9NU"}
+			}
+	); 
+	var basePath = "/NHANES/resourceService/path";
 	var examPuis = {
 			selectId : "examPui",
 			groups : []
@@ -32,11 +38,6 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 			selectId : "labPui",
 			groups : []
 	};
-
-	// TODO : remove this, its just for debugging
-	window.dropdownBuilder = dropdownBuilder
-	window.labPuis = labPuis;
-	window.examPuis = examPuis;
 
 	var functionAsString = function(func){
 		return func.toString().replace(/(?:\r\r|\r|\n|\t)/g,'');
@@ -56,7 +57,7 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 		};
 		return query;
 	};
-	
+
 	var scriptQuerySSC = function(xResultSet, yResultSet, zResultSet, xDisplayName, yDisplayName){
 		var query = {
 				"script": functionAsString(remoteFunctions.SSC),
@@ -72,20 +73,22 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 		};
 		return query;
 	};
-	
+
 	var buildDropdownForAxis = function(axisName){
 		dropdownBuilder.loadOntology(
 				axisName + "Dropdown", 
 				function(ontology){
-			dropdownBuilder.populateDropdownWithSubpaths("#"+axisName + "Dropdown", axisName + "pui", ontology);	
-		}, "#"+axisName + "ProgressSpinner", "#"+axisName + "ProgressPath");
+					dropdownBuilder.populateDropdownWithSubpaths("#"+axisName + "Dropdown", axisName + "pui", ontology);	
+				}, "#"+axisName + "ProgressSpinner", "#"+axisName + "ProgressPath");
 	}
-	
+
 	buildDropdownForAxis("nhanesX");
 	buildDropdownForAxis("nhanesY");
+	/*
+	 * This is for SSC, removed because most people don't have access to SSC.
 	buildDropdownForAxis("sscX");
 	buildDropdownForAxis("sscY");
-	
+	*/
 	var callbacks = {
 			success: function(id, statusSelector){
 				$(statusSelector).removeClass("running");
@@ -107,8 +110,8 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 				$(statusSelector).toggleClass("dark");
 				console.log(id + " STILL RUNNING");
 			}
-		};
-		
+	};
+
 	var buildSciDBVariantAutocomplete = function(){
 		var deferred = $.Deferred();
 		queryCacheManager.submitSciDbQuery("uniq(sort(project(SSC.VariantsI, Gene_refGene)))", "Variants", deferred, callbacks, ".nothing");
@@ -126,11 +129,11 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 		}, function(){
 			console.log("SOMETHING BROKENED");
 		});
-		
+
 	}
-	
+
 	buildSciDBVariantAutocomplete();
-	
+
 	$('.scatter-button').click(function(event){
 		var clickTime = new Date().getTime();
 		var resourceName = event.target.dataset['resource'];
@@ -143,30 +146,32 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 			selectedZPui = $('#sscSciDBColor').val();			
 		}
 		scatterPlot.renderWait(resourceNameLower + "-scatter", "Collecting Data...");
-		
+
 		var deferreds = [
-			$.Deferred(),
-			$.Deferred()
-		];
+		                 $.Deferred(),
+		                 $.Deferred()
+		                 ];
 		queryCacheManager["submitQuery" + resourceName]([{
 			pui : selectedXPui.data("pui"),
 			label : selectedXPui.data("label"),
 			groupName : selectedXPui.data("groupname")
 		}], selectedXPui.data("label"), deferreds[0], callbacks, "#" + resourceNameLower + "XPuiStatus");
-		
+
 		queryCacheManager["submitQuery" + resourceName]([{
 			pui : selectedYPui.data("pui"),
 			label : selectedYPui.data("label"),
 			groupName : selectedYPui.data("groupname")
 		}], selectedYPui.data("label"), deferreds[1], callbacks, "#" + resourceNameLower + "YPuiStatus");
-		
-		
+
+
 		if(selectedZPui != null){
 			deferreds[2] = $.Deferred();
 			queryCacheManager.submitSciDbQuery("cross_join(project(filter(SSC.MetaDataI, Status = 's1'), Family_ID,Status,Family_and_Status) as X1,aggregate(cross_join(project(filter(SSC.DataI, VCF_DP > 20), VCF_GT) as X, project(filter(SSC.VariantsI, Gene_refGene='"+selectedZPui+"'), Ref,Alt,PopFreqMax) as Y, X.Variant_ID, Y.Variant_ID), count(*), Individual_ID) as Y1, X1.Individual_ID, Y1.Individual_ID)",
 					selectedZPui, deferreds[2], callbacks, '#sciDbPuiStatus');
 		}
-		
+
+		var remoteResult;
+
 		var queriesSuccessful = function(){
 			scatterPlot.renderWait(resourceNameLower + "scatter", "Collected Data... Running Script...");
 			var scriptQuery;
@@ -190,8 +195,13 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 				break;
 			default:
 				console.log("Unknown resourceName : " + resourceName);
-				break;
+			break;
 			}
+			/*
+			 * This code relied on the hackathon specific script functionality
+			 * of PIC-SURE. This functionality is not available in production
+			 * so we have instead implemented the scripting functionality locally.
+			 * 
 			$.ajax(scriptPath, {
 				data : JSON.stringify(scriptQuery),
 				contentType: 'application/json',
@@ -204,14 +214,49 @@ require(["scatterPlot", "dropdownBuilder", "remoteFunctions", "queryCacheManager
 					$('#' + resourceNameLower + 'scatter').html("Processing of query results has failed : " + jqXHR.responseText);
 				}
 			});
+			 */
+
+			var deferred = $.Deferred();
+			executeRemoteScriptLocally(deferred, resourceName, scriptQuery);
+			scatterPlot.renderWait(resourceName + "-scatter", "Collected Data... Running Script... Rendering...");
+			$.when(deferred).then(function(){
+				scatterPlot.render(resourceName + "-scatter", remoteResult);				
+			});
+
 			console.log("Success: ");
 		};
 		
+		var executeRemoteScriptLocally = function(deffered, resourceName, scriptQuery){
+			$.ajax({
+				url : resourceMeta[resourceName.toLowerCase()].queryResultBasePath + scriptQuery.resultSets.x + "/JSON",
+				success : function(resultSetX){
+					$.ajax({
+						url : resourceMeta[resourceName.toLowerCase()].queryResultBasePath + scriptQuery.resultSets.y + "/JSON",
+						success : function(resultSetY){
+							scriptQuery.resultSets.x = resultSetX;
+							scriptQuery.resultSets.y = resultSetY;
+							remoteResult = remoteFunctions[resourceName](JSON.stringify(scriptQuery));
+							deffered.resolve();
+						},
+						failure : function(data){
+							console.log(data);
+							deffered.resolve();
+						}
+					});
+					
+				},
+				failure : function(data){
+					console.log(data);
+				}
+			});
+
+		};
+
 		var someQueriesFailed = function(){
 			console.log("Something failed: ");
 		};
 		$.when.apply($, deferreds)
 		.then(queriesSuccessful, someQueriesFailed);
-		
+
 	});
 });
