@@ -1,14 +1,6 @@
-define(['jquery', 'underscore'], function($, _){
-	var nhanes = {
-		queryPath : "/NHANES/rest/queryService/runQuery",
-		queryStatusBasePath : "/NHANES/rest/resultService/resultStatus/"
-	}
-	
-	var ssc = {
-		queryPath : "/SSC/rest/queryService/runQuery",
-		queryStatusBasePath : "/SSC/rest/resultService/resultStatus/"
-	}
-	
+define(['jquery','resourceMeta', 'underscore'], function($, resourceMeta, _){
+	var nhanes = resourceMeta.nhanes;
+	var ssc = resourceMeta.ssc;
 	var submitQueryNHANES = function(pathGrouping, displayName, deferred, callbacks, statusUpdateId){
 		submitQuery(nhanes, pathGrouping, displayName, deferred, callbacks, statusUpdateId);
 	}
