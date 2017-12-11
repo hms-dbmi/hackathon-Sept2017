@@ -11,7 +11,7 @@ define(['underscore', 'plotly'], function(_, plotly){
 	 */
 	var render = function(elementId, callbackOptions){
 		$('#' + elementId).html("");
-		var data = callbackOptions[0];
+		var data = typeof callbackOptions === "array" ? callbackOptions[0] : {data : callbackOptions.data};
 		var renderStart = new Date().getTime();
 		var trace = {
 				x : _.pluck(data.data, "x"),
